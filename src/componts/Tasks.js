@@ -63,7 +63,10 @@ export default function Tasks({ task }) {
       </button>
 
       <button
-        onClick={() => setShowEditForm(true)}
+        onClick={() => 
+          setTitleEdit(task.title) || 
+          setDetalsEdit(task.detals) ||
+          setShowEditForm(true)}
         style={{
           backgroundColor: "white",
           color: "blue",
