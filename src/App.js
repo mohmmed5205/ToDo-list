@@ -1,24 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import ToDoList from './componts/ToDoList';
+import { useState } from 'react';
+import TaskContext from './context/TaskContext';
+const taskList = [
+  { id: 0, 
+    title: 'مهمة 1',
+      detals: 'هذه مهمة سهلة جدا',
+     completed: false },
+
+  { id: 1, 
+    title: 'مهمة 2',
+    detals: 'هذه مهمة مهمة جدا',
+     completed: false },
+
+  { id: 2,
+     title: 'مهمة 3',
+      detals: 'هذه مهمة عادية',
+     completed: false },
+];
 
 function App() {
+  const [tasks, setTasks] = useState(taskList);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }} >
+      <TaskContext.Provider value={{ tasks, setTasks }}>
+      <ToDoList/>
+      </TaskContext.Provider>
     </div>
+   
   );
 }
 
