@@ -1,5 +1,5 @@
 import Tasks from "./Tasks";
-import { useContext, useState } from "react";
+import { useContext, useState , useEffect} from "react";
 import TaskContext from "../context/TaskContext";
 export default function ToDoList() {
        const [filter, setFilter] = useState("all");
@@ -20,23 +20,34 @@ export default function ToDoList() {
   ));
    function handleAddTask(){
     const newTask = {
-        id: tasks.length + 1,
+        id: tasks.length ,
         title: addTitleTask,
         detals: addDetalsTask,
         completed: false,
     };
-    setTasks([...tasks, newTask]);
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     setAddTitleTask("");
     setAddDetalsTask("");
     }
- 
+    useEffect(() => {
+      console.log("hi");
+      const storejTask= JSON.parse(localStorage.getItem("tasks"));setTasks(storejTask)
+      
+      
+    },[])
 
   
   return (
     <div style={{direction:"rtl" ,background:"lightblue", padding:"20px", borderRadius:"8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", width: "300px" ,marginTop:"200px"}}>
         <hr/>
       <h2>مهمامي</h2>
-      <button onClick={()=>setFilter("all")} >الكل</button>
+      <button 
+      style={{}}
+      onClick={()=>setFilter("all")
+        
+      } >الكل</button>
         <button onClick={()=>setFilter("completed")}>المكتملة</button>
         <button onClick={()=>setFilter("notcompleted")}>غير المكتملة</button>
       <hr/>

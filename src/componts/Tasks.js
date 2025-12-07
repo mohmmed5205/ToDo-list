@@ -15,6 +15,7 @@ export default function Tasks({ task }) {
       t.id === task.id ? { ...t, completed: !t.completed } : t
     );
     setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   }
 
   function handlEdeit() {
@@ -25,12 +26,14 @@ export default function Tasks({ task }) {
     );
     setTasks(updated);
     setShowEditForm(false);
+    localStorage.setItem("tasks", JSON.stringify(updated));
   }
 
   function handleDelete() {
     const updated = tasks.filter((t) => t.id !== task.id);
     setTasks(updated);
     setShowDeleteConfirm(false);
+    localStorage.setItem("tasks", JSON.stringify(updated));
   }
  
   return (
@@ -57,6 +60,7 @@ export default function Tasks({ task }) {
           borderRadius: "5px",
           marginLeft: "6px",
           cursor: "pointer",
+          
         }}
       >
         اكتمال
