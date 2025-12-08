@@ -34,7 +34,7 @@ export default function ToDoList() {
     }
     useEffect(() => {
       console.log("hi");
-      const storejTask= JSON.parse(localStorage.getItem("tasks"));setTasks(storejTask)
+      const storejTask= JSON.parse(localStorage.getItem("tasks"))??[];setTasks(storejTask);
       
       
     },[])
