@@ -11,6 +11,7 @@ export default function ToDoList() {
     const filteredTasks = tasks.filter((t) => {
     if (filter === "completed") return t.completed;
     if (filter === "notcompleted") return !t.completed;
+    
     return true; 
     
   });
@@ -50,6 +51,7 @@ export default function ToDoList() {
       } >الكل</button>
         <button onClick={()=>setFilter("completed")}>المكتملة</button>
         <button onClick={()=>setFilter("notcompleted")}>غير المكتملة</button>
+        
       <hr/>
      {jsxTasks}
       
