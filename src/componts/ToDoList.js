@@ -20,7 +20,7 @@ export default function ToDoList() {
     <Tasks key={task.id} task={task} />
   ));
    function handleAddTask(){
-    if (!addTitleTask.trim()) return;
+if (!addTitleTask.trim() || !addDetalsTask.trim()) return;
 
     const newTask = {
         id: tasks.length ,
