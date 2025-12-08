@@ -19,6 +19,7 @@ export default function Tasks({ task }) {
   }
 
   function handlEdeit() {
+    if (!titleEdit.trim() || !detalsEdit.trim()) return;
     const updated = tasks.map((t) =>
       t.id === task.id
         ? { ...t, title: titleEdit, detals: detalsEdit }
