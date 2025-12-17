@@ -1,0 +1,110 @@
+import * as React from 'react';
+import Container from '@mui/material/Container';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
+import Tasks from './Tasks';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import { useState, useContext,useEffect } from 'react';
+import { TasksContext } from '../contaxt/TasksContext';
+import { v4 as uuidv4 } from "uuid";
+
+export default function TodoList() {
+  const { tasks, setTask } = useContext(TasksContext);
+  const [titleInput, setTitleInput] = useState("");
+  const [DescriptionInput, setDescriptionInput] = useState("");
+
+  const tasksJsx = tasks.map((task) => <Tasks key={task.id} task={task} />);
+
+  function handlerAddBut() {
+
+    const newTask = {
+      id: uuidv4(),
+      title: titleInput,
+      Description: DescriptionInput,
+      isComblet: false
+    };
+    const updatedTasks = [...tasks, newTask];
+    setTask(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    setTitleInput("");
+    setDescriptionInput("");
+  }
+  useEffect(() => {
+  const storedTasks = localStorage.getItem("tasks");
+  if (storedTasks) {
+    setTask(JSON.parse(storedTasks));
+  }
+}, []);
+  
+   useEffect(() => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}, [tasks]);
+ 
+    
+  return (
+    <Container maxWidth="sm">
+      <Card sx={{ minWidth: 275 }}>
+        <CardContent>
+
+          <Typography variant='h2' gutterBottom sx={{ color: 'text.secondary' }}>
+            مهامي
+          </Typography>
+
+          <Divider sx={{ marginBottom: 2 }} />
+
+          {/* أزرار الفلترة */}
+          <Stack direction="row" spacing={2} sx={{ marginBottom: 2 }}>
+            <Button variant="text" fullWidth>الكل</Button>
+            <Button variant="contained" fullWidth>المهام المنجزه</Button>
+            <Button variant="outlined" fullWidth>المهام غير المنجزه</Button>
+          </Stack>
+
+          {/* جميع المهام */}
+          {tasksJsx}
+
+          {/* إدخال مهمة جديدة */}
+          <Card sx={{ mt: 2, p: 2, borderRadius: 2 }}>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs>
+                <div>
+        <TextField
+        value={titleInput}
+        onChange={(e)=>setTitleInput(e.target.value)}
+          id="outlined-multiline-flexible"
+          label= "عنوان المهمة"
+          multiline
+          maxRows={4}
+        />
+        <TextField
+        value={DescriptionInput}
+        onChange={(e)=>setDescriptionInput(e.target.value)}
+          id="outlined-textarea"
+          label=" وصف المهمة"
+          placeholder="Placeholder"
+          multiline
+        />
+        </div>
+              </Grid>
+              <Grid item xs="auto">
+                <Button
+                  onClick={handlerAddBut}
+                  variant='contained'
+                  size="large"
+                  sx={{ height: '100%' }}
+                >
+                  اضافه
+                </Button>
+              </Grid>
+            </Grid>
+          </Card>
+             
+        </CardContent>
+      </Card>
+    </Container>
+  );
+}

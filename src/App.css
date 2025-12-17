@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.iconBut{
+transition: all 0.2s !important;
+}
+
+.iconBut:hover{
+  background: #00000065 !important;
+  box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.4);
+}
+
+.todoCared{
+  transition: all 0.2s !important;
+
+}
+
+.todoCared:hover{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.4);
+}
+
+.butAdd{
+  width: 100% ;
+  height: 100%;
+}
+
+.inputAdd{
+  width: 100%;
+  height: 100%;
+}

@@ -1,23 +1,46 @@
-import logo from './logo.svg';
+import {  useState } from 'react';
 import './App.css';
+import TodoList from './combonats/TodoList';
+import { TasksContext } from './contaxt/TasksContext';
+import {v4 as uuidv4} from 'uuid';
 
+
+const initialTasks=[
+      {
+        id:uuidv4(),
+        title:"farest task",
+        Description:"creat home page 123",
+        isComblet:false
+      },
+      {
+        id:uuidv4(),
+        title:"sacend task",
+        Description:"creat abuot page",
+        isComblet:false
+      },
+      {
+        id:uuidv4(),
+        title:"third task",
+        Description:"creat contact page",
+        isComblet:false
+      }
+    ];
 function App() {
+
+
+    const [tasks,setTask]= useState(initialTasks);
+    
+
+   
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{display:"flex",justifyContent:"center" , alignItems:"center" ,height:"100vh",
+      direction:"rtl"
+    }}>
+      <TasksContext.Provider value={{tasks,setTask}}>
+         <TodoList/>
+
+         </TasksContext.Provider>
+     
     </div>
   );
 }
